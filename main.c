@@ -8,9 +8,9 @@ char canvas[ROWS][COLS];
 
 void initializeCanvas()
 {
-    for(int i=0;i<ROWS;i++)
+    for(int i=0; i<ROWS; i++)
     {
-        for(int j=0;j<COLS;j++)
+        for(int j=0; j<COLS; j++)
         {
             canvas[i][j] = '_';
         }
@@ -19,9 +19,9 @@ void initializeCanvas()
 
 void displayCanvas()
 {
-    for(int i=0;i<ROWS;i++)
+    for(int i=0; i<ROWS; i++)
     {
-        for(int j=0;j<COLS;j++)
+        for(int j=0; j<COLS; j++)
         {
             printf("%c ", canvas[i][j]);
         }
@@ -59,9 +59,23 @@ void drawLine(int x1, int y1, int x2, int y2)
 
     for(int i=0; i<=steps; i++)
     {
-        canvas[(int)(y+0.5)][(int)(x+0.5)]='*';
+        canvas[(int)(y + 0.5)][(int)(x + 0.5)] = '*';
         x += xInc;
         y += yInc;
+    }
+}
+
+void drawTriangle(int x, int y, int height)
+{
+    for(int i=0; i<height; i++)
+    {
+        canvas[y+i][x-i] = '*';
+        canvas[y+i][x+i] = '*';
+    }
+
+    for(int i=x-height+1; i<=x+height-1; i++)
+    {
+        canvas[y+height-1][i] = '*';
     }
 }
 
@@ -77,9 +91,10 @@ int main()
         printf("1. Display Canvas\n");
         printf("2. Draw Rectangle\n");
         printf("3. Draw Line\n");
-        printf("4. Exit\n");
+        printf("4. Draw Triangle\n");
+        printf("5. Exit\n");
         printf("Enter choice: ");
-        scanf("%d",&choice);
+        scanf("%d", &choice);
 
         switch(choice)
         {
@@ -88,16 +103,21 @@ int main()
                 break;
 
             case 2:
-                drawRectangle(5,5,10,6);
+                drawRectangle(5, 5, 10, 6);
                 printf("Rectangle Drawn!\n");
                 break;
 
             case 3:
-                drawLine(0,0,15,10);
+                drawLine(0, 0, 15, 10);
                 printf("Line Drawn!\n");
                 break;
 
             case 4:
+                drawTriangle(15, 2, 6);
+                printf("Triangle Drawn!\n");
+                break;
+
+            case 5:
                 printf("Exiting...\n");
                 break;
 
@@ -105,7 +125,7 @@ int main()
                 printf("Invalid Choice!\n");
         }
 
-    } while(choice!=4);
+    } while(choice != 5);
 
     return 0;
 }
