@@ -79,6 +79,26 @@ void drawTriangle(int x, int y, int height)
     }
 }
 
+void drawCircle(int centerX, int centerY, int radius)
+{
+    for(int y=0; y<ROWS; y++)
+    {
+        for(int x=0; x<COLS; x++)
+        {
+            int dx = x - centerX;
+            int dy = y - centerY;
+
+            if(dx*dx + dy*dy <= radius*radius)
+            {
+                canvas[y][x] = '*';
+            }
+        }
+    }
+}
+void clearCanvas()
+{
+    initializeCanvas();
+}
 int main()
 {
     int choice;
@@ -92,7 +112,9 @@ int main()
         printf("2. Draw Rectangle\n");
         printf("3. Draw Line\n");
         printf("4. Draw Triangle\n");
-        printf("5. Exit\n");
+        printf("5. Draw Circle\n");
+        printf("6. Clear Canvas\n");
+        printf("7. Exit\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
 
@@ -113,19 +135,29 @@ int main()
                 break;
 
             case 4:
-                drawTriangle(15, 2, 6);
+                drawTriangle(15, 10, 6);
                 printf("Triangle Drawn!\n");
                 break;
 
             case 5:
-                printf("Exiting...\n");
+                drawCircle(20, 10, 5);
+                printf("Circle Drawn!\n");
                 break;
+
+            case 6:
+                clearCanvas();
+                printf("Canvas Cleared!\n");
+                break;
+
+            case 7:
+               printf("Exiting...\n");
+               break;
 
             default:
                 printf("Invalid Choice!\n");
         }
 
-    } while(choice != 5);
+    } while(choice != 7);
 
     return 0;
 }
