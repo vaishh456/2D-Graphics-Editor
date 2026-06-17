@@ -30,7 +30,33 @@ void displayCanvas()
 
 int main()
 {
+    int choice;
+
     initializeCanvas();
-    displayCanvas();
+
+    do
+    {
+        printf("\n===== 2D Graphics Editor =====\n");
+        printf("1. Display Canvas\n");
+        printf("2. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d",&choice);
+
+        switch(choice)
+        {
+            case 1:
+                displayCanvas();
+                break;
+
+            case 2:
+                printf("Exiting...\n");
+                break;
+
+            default:
+                printf("Invalid Choice!\n");
+        }
+
+    } while(choice!=2);
+
     return 0;
 }
